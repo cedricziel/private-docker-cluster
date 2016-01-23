@@ -1,6 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env
 
 machinePrefix="";
+swarmId="";
+provider="";
 
 if [ -f ".env" ]; then
   source .env;
@@ -18,10 +20,18 @@ else
   exit 1;
 fi
 
-echo "Creating swarm master with provider $provider";
+if [ -f ".swarm-id" ]; then
+  swarmId=$(<.swarm-id);
+else
+  echo "Error. No swarm id present. Re-Run create-swarm.sh";
+  exit 1;
+fi
+
+nodeId=$(uuidgen);
+echo "Creating node $nodeId on provider: $provider";
+
 docker-machine create \
-        -d $provider \
-        --swarm \
-        --swarm-master \
-        --swarm-discovery "token://$swarmId" \
-        "$machinePrefix-swarm-master"
+  -d $provider \
+  --swarm \
+  --swarm-discovery "token://$swarmId" \
+  "$machinePrefix-swarm-node-$nodeId"
