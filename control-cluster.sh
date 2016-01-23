@@ -28,4 +28,4 @@ else
 fi
 
 echo "You are going to control the currently present cluster, execute";
-echo "$(docker-machine env $machinePrefix-swarm-master)";
+echo "$(docker-machine env --swarm $machinePrefix-swarm-master)";
