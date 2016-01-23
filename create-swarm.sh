@@ -26,6 +26,8 @@ else
   fi
 
   echo $swarmId >> .swarm-id;
+  machinePrefix=${swarmId:0:5}
+  echo $machinePrefix >> .machine-prefix;
 fi
 
 echo "Swarm ID is $swarmId";
