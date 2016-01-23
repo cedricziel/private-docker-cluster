@@ -33,5 +33,5 @@ echo "Creating node $nodeId on provider: $provider";
 docker-machine create \
   -d $provider \
   --swarm \
-  --swarm-discovery "token://$swarmId" \
+  --swarm-discovery token://$swarmId \
   "$machinePrefix-swarm-node-$nodeId"

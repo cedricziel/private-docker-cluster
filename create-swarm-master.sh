@@ -18,10 +18,17 @@ else
   exit 1;
 fi
 
+if [ -f ".swarm-id" ]; then
+  swarmId=$(<.swarm-id);
+else
+  echo "Error. No swarm id present. Re-Run create-swarm.sh";
+  exit 1;
+fi
+
 echo "Creating swarm master with provider $provider";
 docker-machine create \
         -d $provider \
         --swarm \
         --swarm-master \
-        --swarm-discovery "token://$swarmId" \
-        "$machinePrefix-swarm-master"
+        --swarm-discovery token://$swarmId \
+        $machinePrefix-swarm-master
