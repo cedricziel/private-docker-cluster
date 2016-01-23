@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 # read the configuration
-source .env;
+if [ -f ".env" ]; then
+  source .env;
+else
+  echo "Error. No configuration available. Create a .env file from .env.example";
+  exit 1;
+fi
 
 swarmId=""
 
